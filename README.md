@@ -29,3 +29,9 @@ vagrant up
 ```bash
 vagrant destroy -f
 ```
+
+## Tips
+```bash
+vagrant ssh
+```
+> To connect to the VM using SSH
