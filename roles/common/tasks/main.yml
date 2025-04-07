@@ -1,0 +1,28 @@
+---
+- name: Update packages
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: yes
+
+- name: Install basic apps
+  ansible.builtin.apt:
+    name:
+      - curl
+      - git
+      - vim
+      - htop
+    state: present
+
+- name: Remove unused packages
+  ansible.builtin.apt:
+    autoremove: yes
+  tags: upgrade
+
+- name: Verify if reboot is required
+  ansible.builtin.stat:
+    path: /var/run/reboot-required.pkgs
+  register: reboot_required
+
+- name: Reboot if required
+  import_tasks: handlers/main.yml
+  when: reboot_required.stat.exists
