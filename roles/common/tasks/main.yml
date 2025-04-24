@@ -16,7 +16,6 @@
 - name: Remove unused packages
   ansible.builtin.apt:
     autoremove: yes
-  tags: upgrade
 
 - name: Verify if reboot is required
   ansible.builtin.stat:
